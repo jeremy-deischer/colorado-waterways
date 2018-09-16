@@ -112,16 +112,20 @@
 				var dataLayer = L.geoJson(data, {
 					style: function (feature) {
 						return{
-							color: '#dddddd',
+							color: 'black',
 							weight: 1,
-							fillOpacity: 1,
-							fillColor: '#1f78b4'
 						};
 					},
-					// //tooltip goes here
-					// onEachFeature: function (feature, layer) {
-					// 	layer.bindTooltip()
-					// }
+					//tooltip goes here
+					onEachFeature: function (feature, layer) {
+						layer.bindTooltip(feature.properties.GNIS_Name)
+					},
+					//filter smaller streams from dataset
+					filter: function (feature, layer) {
+						if (feature.properties.LengthKM > 0.01){
+							return feature;
+						}
+					}
 				}).addTo(map);
 
 		}); //end of getJSON
