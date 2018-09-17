@@ -3,7 +3,7 @@
 
 <head>
 	<meta charset=utf-8 />
-	<title>Full map width template</title>
+	<title>Denver Drainageways</title>
 	<meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
 
 	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.4/dist/leaflet.css" />
@@ -78,11 +78,9 @@
 	<div id='map'></div>
 
 	<section id="about">
-		<h2>NHD Waterways in UDFCD</h2>
-		<p>UDFCD boundary was obtained from
+		<h2>Denver Drainageways</h2>
+		<p>Data downloaded from from
 			<a href="http://data.opencolorado.org/organization/urban-drainage-org"> Open Data Colorado</a></p>
-		<p> Drainageways are from
-			<a href="https://www.usgs.gov/core-science-systems/ngp/national-hydrography"> National Hydrology Dataset</a></p>
 		<p>See my projects on <a href="https://github.com/jeremy-deischer">Github</a>.</p>
 		<p>Follow me on <a href="https://twitter.com/JeremyDeischer">Twitter</a>.</p>
 	</section>
@@ -141,7 +139,7 @@
 
 				layer.setStyle({
 					color: getColor(props.shape_leng, breaks),
-					weight: getWeight(props.shape_leng, breaks)
+					weight: getWeight(props.class)
 				});
 			}); //end of each layer
 		} //end of drawMap
@@ -183,20 +181,59 @@
 			}
 		}; //end of getColorWidth
 
-		function getWeight(d, breaks) {
-			if (d <= breaks[0][1]) {
-				return 0.5;
-			} else if (d <= breaks[1][1]) {
-				return 0.75;
-			} else if (d <= breaks[2][1]) {
-				return 1;
-			} else if (d <= breaks[3][1]) {
-				return 1.5;
-			} else if (d <= breaks[4][1]) {
+		function getWeight(streamType) {
+			if (streamType == 'MajorStream') {
+				return 3;
+			} else if (streamType == '4digit') {
 				return 2;
+			} else if (streamType == 'DFA') {
+				return 1;
+			} else if (streamType == 'Trib') {
+				return 0.5;
 			}
-			console.log(d);
 		}; //end of getWidth
+
+
+		//function draws a dynamic legend
+
+    function drawLegend(breaks) {
+
+      // create a new Leaflet control object, and assign position
+      var legend = L.control({
+        position: 'bottomleft'
+      });
+
+      // when the legend is added to the map
+      legend.onAdd = function() {
+
+        // create a new HTML <div> element and give it a class name of "legend"
+        var div = L.DomUtil.create('div', 'legend');
+
+        // first append an <h3> tag to the div holding the current attribute
+        // and norm values (i.e., the mapped phenomena)
+        div.innerHTML = "<h3> Average County Rent Price</h3>";
+
+        // for each of our breaks
+        for (var i = 0; i < breaks.length; i++) {
+          // determine the color associated with each break value,
+          // including the lower range value
+          var color = getColor(breaks[i][0], breaks);
+
+          // concatenate a <span> tag styled with the color and the range values
+          // of that class and include a label with the low and a high ends of that class range
+          div.innerHTML +=
+            '<span style="background:' + color + '"></span> ' +
+            '<label>$' + breaks[i][0].toLocaleString() + ' &mdash; $' +
+            breaks[i][1].toLocaleString() + '</label>';
+        }
+
+        // return the populated div to be added to the map
+        return div;
+      };
+
+      // add the legend to the map
+      legend.addTo(map);
+    } // end of drawLegend function
 
 	</script>
 </body>
