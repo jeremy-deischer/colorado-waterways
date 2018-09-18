@@ -186,7 +186,7 @@
 					return {
 						color: 'black',
 						fillOpacity: 0,
-						weight: 0
+						weight: 1.0
 					}
 				}
 			}).addTo(map);
@@ -204,7 +204,7 @@
 				var props = layer.feature.properties;
 
 				layer.setStyle({
-					color: getColor(props.Density, breaks),
+					fillColor: getColor(props.Density, breaks),
 					fillOpacity: 0.4
 				});
 			}); //end of each layer
