@@ -68,6 +68,38 @@
 		a:hover {
 			text-decoration: underline;
 		}
+
+		.legend {
+			padding: 6px 8px;
+			font-size: 1em;
+			background: rgba(255, 255, 255, 0.8);
+			box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+			border-radius: 5px;
+		}
+
+		.legend h3 {
+			font-size: 1.1em;
+			font-weight: normal;
+			color: #001323;
+			margin: 0 0 10px 0;
+		}
+
+		.legend span {
+			width: 20px;
+			height: 20px;
+			float: left;
+			margin: 0 10px 4px 0;
+		}
+
+		.legend label {
+			font-size: 1.1em;
+		}
+
+		.legend label:after {
+			content: '';
+			display: block;
+			clear: both;
+		}
 	</style>
 </head>
 
@@ -167,9 +199,10 @@
 
 				layer.setStyle({
 					color: getColor(props.Density, breaks),
-					fillOpacity: 0.6
+					fillOpacity: 0.4
 				});
 			}); //end of each layer
+			drawLegend(breaks);
 		} //end of drawMap
 
 		function getClassBreaks(dataLayer) {
