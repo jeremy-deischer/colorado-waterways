@@ -57,7 +57,7 @@
 
 		p {
 			font-size: .9em;
-			line-height: 0.8em;
+			line-height: 1.0em;
 		}
 
 		a {
@@ -79,7 +79,7 @@
 
 		.legend h3 {
 			font-size: 1.1em;
-			font-weight: normal;
+			font-weight: bold;
 			color: #001323;
 			margin: 0 0 10px 0;
 		}
@@ -110,9 +110,14 @@
 	<div id='map'></div>
 
 	<section id="about">
-		<h2>Denver Drainageways</h2>
-		<p>Data downloaded from from
+		<h2>UDFCD Project Density Per Basin</h2>
+		<p>Density for each basin was calculated summarizing the number of
+			UDFCD Projects for each National Hydrology Datset
+			Hydrologic Unit 10 Basin. </p>
+		<p>Streams and UDFCD projects downloaded from
 			<a href="http://data.opencolorado.org/organization/urban-drainage-org"> Open Data Colorado</a></p>
+		<p> NHD HUC 10 basins downloaded from
+			<a href="https://water.usgs.gov/GIS/huc.html"> USGS</a>
 		<p>See my projects on <a href="https://github.com/jeremy-deischer">Github</a>.</p>
 		<p>Follow me on <a href="https://twitter.com/JeremyDeischer">Twitter</a>.</p>
 	</section>
@@ -181,6 +186,7 @@
 					return {
 						color: 'black',
 						fillOpacity: 0,
+						weight: 0
 					}
 				}
 			}).addTo(map);
@@ -270,7 +276,7 @@
 
 				// first append an <h3> tag to the div holding the current attribute
 				// and norm values (i.e., the mapped phenomena)
-				div.innerHTML = "<h3>Density of UDFCD Projects per Watershed</h3>";
+				div.innerHTML = "<h3>Density (Project / Square KM)</h3>";
 
 				// declaring each break a category for text label
 				ranked = ['Very Low ', 'Low ', 'Medium ', 'High ', 'Very High ']
