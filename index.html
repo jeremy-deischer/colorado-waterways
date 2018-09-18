@@ -105,7 +105,7 @@
 
 <body>
 
-	<h1>Where Does the Water Flow?</h1>
+	<h1>Where Do the Projects Get Built?</h1>
 
 	<div id='map'></div>
 
@@ -270,8 +270,10 @@
 
 				// first append an <h3> tag to the div holding the current attribute
 				// and norm values (i.e., the mapped phenomena)
-				div.innerHTML = "<h3> Average County Rent Price</h3>";
+				div.innerHTML = "<h3>Density of UDFCD Projects per Watershed</h3>";
 
+				// declaring each break a category for text label
+				ranked = ['Very Low ', 'Low ', 'Medium ', 'High ', 'Very High ']
 				// for each of our breaks
 				for (var i = 0; i < breaks.length; i++) {
 					// determine the color associated with each break value,
@@ -282,8 +284,8 @@
 					// of that class and include a label with the low and a high ends of that class range
 					div.innerHTML +=
 						'<span style="background:' + color + '"></span> ' +
-						'<label>$' + breaks[i][0].toLocaleString() + ' &mdash; $' +
-						breaks[i][1].toLocaleString() + '</label>';
+						'<label>' + ranked[i] + ' (' + breaks[i][0].toLocaleString()
+						+ ' &mdash; ' +	breaks[i][1].toLocaleString() + ')</label>';
 				}
 
 				// return the populated div to be added to the map
