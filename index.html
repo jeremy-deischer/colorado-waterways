@@ -159,9 +159,19 @@
 						weight: 1.50
 					};
 				},
-				//tooltip
+				//highlight feature on mouse over and tooltip
 				onEachFeature: function(feature, layer) {
-					layer.bindTooltip('<b>'+feature.properties.name)
+					layer.on('mouseover', function() {
+						layer.setStyle({
+							color: 'yellow'
+						});
+					});
+					layer.on('mouseout', function() {
+						layer.setStyle({
+							color: 'green'
+						});
+					});
+					layer.bindTooltip('<b>' + feature.properties.name)
 				}
 			}).addTo(map);
 		}); //end of getJSON
@@ -177,8 +187,18 @@
 						weight: getWeight(feature.properties.class),
 					};
 				},
-				//tooltip goes here
+				//highlight feature on mouse over and tooltip
 				onEachFeature: function(feature, layer) {
+					layer.on('mouseover', function() {
+						layer.setStyle({
+							color: 'yellow'
+						});
+					});
+					layer.on('mouseout', function() {
+						layer.setStyle({
+							color: '#6baed6'
+						});
+					});
 					layer.bindTooltip('<b>' + feature.properties.str_name + '<br></b>' +
 						'<b> Stream Length </b>' + feature.properties.streamleng.toFixed(2) +
 						' mi.')
@@ -224,11 +244,7 @@
 					fillOpacity: 0.4
 				});
 			}); //end of each layer
-<<<<<<< HEAD
-			drawLegend(dataLayer);
-=======
 			drawLegend(breaks);
->>>>>>> 39cc0879fabc4f4fa9d14eef85f1c7215a988fb4
 		} //end of drawMap
 
 		function getClassBreaks(dataLayer) {
@@ -281,16 +297,6 @@
 		}; //end of getWidth
 
 		//function draws a dynamic legend
-<<<<<<< HEAD
-
-		function drawLegend(breaks) {
-
-			// create a new Leaflet control object, and assign position
-			var legend = L.control({
-				position: 'bottomright'
-			});
-
-=======
 		function drawLegend(breaks) {
 
 			// create a new Leaflet control object, and assign position
@@ -298,7 +304,6 @@
 				position: 'bottomleft'
 			});
 
->>>>>>> 39cc0879fabc4f4fa9d14eef85f1c7215a988fb4
 			// when the legend is added to the map
 			legend.onAdd = function() {
 
@@ -307,15 +312,10 @@
 
 				// first append an <h3> tag to the div holding the current attribute
 				// and norm values (i.e., the mapped phenomena)
-<<<<<<< HEAD
-				div.innerHTML = "<h3> Stream Classification</h3>";
-
-=======
 				div.innerHTML = "<h3>Density (Project / Square KM)</h3>";
 
 				// declaring each break a category for text label
 				ranked = ['Very Low ', 'Low ', 'Medium ', 'High ', 'Very High ']
->>>>>>> 39cc0879fabc4f4fa9d14eef85f1c7215a988fb4
 				// for each of our breaks
 				for (var i = 0; i < breaks.length; i++) {
 					// determine the color associated with each break value,
@@ -326,13 +326,8 @@
 					// of that class and include a label with the low and a high ends of that class range
 					div.innerHTML +=
 						'<span style="background:' + color + '"></span> ' +
-<<<<<<< HEAD
-						'<label>$' + breaks[i][0].toLocaleString() + ' &mdash; $' +
-						breaks[i][1].toLocaleString() + '</label>';
-=======
 						'<label>' + ranked[i] + ' (' + breaks[i][0].toLocaleString() +
 						' &mdash; ' + breaks[i][1].toLocaleString() + ')</label>';
->>>>>>> 39cc0879fabc4f4fa9d14eef85f1c7215a988fb4
 				}
 
 				// return the populated div to be added to the map
@@ -342,20 +337,6 @@
 			// add the legend to the map
 			legend.addTo(map);
 		} // end of drawLegend function
-<<<<<<< HEAD
-
-		// // // Layer Controls
-		// var sourceLabels = {
-		// 	"<b style='color:#FF0000'>Major </b>": fireStations,
-		// 	"<b style='color:#9400D3'>After School Programs</b>": afterSchoolPrograms,
-		// 	"<b style='color:#1f78b4'>Trib</b>": foodStores
-		// }
-		//
-		// L.control.layers(null, sourceLabels, {
-		// 	collapsed: false
-		// }).addTo(map);
-=======
->>>>>>> 39cc0879fabc4f4fa9d14eef85f1c7215a988fb4
 	</script>
 </body>
 
