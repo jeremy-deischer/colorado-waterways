@@ -102,30 +102,54 @@
 		}).addTo(map);
 
 
-		//Load Drainageways into map
-		$.getJSON("data/udfcd_streams.json", function(data) {
-
-			//Provide styling options for layer
+		//Load UDFCD Boundary to map
+		$.getJSON("data/udfcd_boundary.json", function(data){
 			var dataLayer = L.geoJson(data, {
 				style: function(feature) {
 					return {
-						color: 'black',
-						weight: 1,
+						color: 'red',
+						weight: 4,
+						fillOpacity: 0
 					};
-				},
-				//tooltip goes here
-				onEachFeature: function(feature, layer) {
-					layer.bindTooltip(feature.properties.str_name)
-				},
-				//filter smaller streams from dataset
-				// filter: function(feature, layer) {
-				// 	if (feature.properties.LengthKM > 0.01) {
-				// 		return feature;
-				// 	}
-				// }
+				}
 			}).addTo(map);
-			drawMap(dataLayer);
+		}) //end of getJson
+
+
+		//Load Drainageways into map
+		$.getJSON("data/udfcd_streams.json", function(data) {
+
+		//Provide styling options for layer
+		var dataLayer = L.geoJson(data, {
+			style: function(feature) {
+				return {
+					color: 'black',
+					weight: 1,
+				};
+			},
+			//tooltip goes here
+			onEachFeature: function(feature, layer) {
+				layer.bindTooltip('<b>' + feature.properties.str_name+'<br></b>' +
+											'<b> Stream Length </b>' + feature.properties.streamleng.toFixed(2)
+											+ ' mi.')
+			},
+			//filter smaller streams from dataset
+			// filter: function(feature, layer) {
+			// 	if (feature.properties.LengthKM > 0.01) {
+			// 		return feature;
+			// 	}
+			// }
+		}).addTo(map);
+		drawMap(dataLayer);
 		}); //end of getJSON
+
+
+
+
+
+
+
+
 
 		//drawMap will call class breaks to classify lengths of drainagways
 		function drawMap(dataLayer) {
@@ -138,7 +162,7 @@
 				var props = layer.feature.properties;
 
 				layer.setStyle({
-					color: getColor(props.shape_leng, breaks),
+					color: getColor(props.streamleng, breaks),
 					weight: getWeight(props.class)
 				});
 			}); //end of each layer
@@ -149,10 +173,10 @@
 			//create array to store classifications
 			var values = [];
 
-			//loop throught dranageways
+			//loop throught drainageways
 			dataLayer.eachLayer(function(layer) {
 				var props = layer.feature.properties;
-				var value = props.shape_leng;
+				var value = props.streamleng;
 				values.push(value);
 			});
 
@@ -171,14 +195,15 @@
 			if (d <= breaks[0][1]) {
 				return '#084594';
 			} else if (d <= breaks[1][1]) {
-				return;
-				'#2171b5'
+				return '#2171b5';
 			} else if (d <= breaks[2][1]) {
 				return '#4292c6';
 			} else if (d <= breaks[3][1]) {
 				return '#6baed6';
 			} else if (d <= breaks[4][1]) {
 				return '#9ecae1';
+			} else{
+				return 'black';
 			}
 		}; //end of getColorWidth
 
@@ -236,16 +261,7 @@
 		//   legend.addTo(map);
 		// } // end of drawLegend function
 
-		// // // Layer Controls
-		// var sourceLabels = {
-		// 	"<b style='color:#FF0000'>Fire Stations</b>": fireStations,
-		// 	"<b style='color:#9400D3'>After School Programs</b>": afterSchoolPrograms,
-		// 	"<b style='color:#1f78b4'>Food Stores</b>": foodStores
-		// }
-		//
-		// L.control.layers(null, sourceLabels, {
-		// 	collapsed: false
-		// }).addTo(map);
+
 	</script>
 </body>
 
