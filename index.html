@@ -20,7 +20,7 @@
 			position: absolute;
 			margin-top: 0;
 			top: 10px;
-			left: 15px;
+			left: 75px;
 			font-size: 2em;
 			font-family: serif;
 			letter-spacing: .04em;
@@ -34,6 +34,12 @@
 		h2 {
 			font-family: serif;
 			letter-spacing: .04em;
+		}
+
+		h4 {
+			font-family: serif;
+			letter-spacing: .04em;
+			margin: 5px;
 		}
 
 		#map {
@@ -57,7 +63,8 @@
 
 		p {
 			font-size: .9em;
-			line-height: 1.0em;
+			line-height: 1.2em;
+			margin: 5px;
 		}
 
 		a {
@@ -111,13 +118,21 @@
 
 	<section id="about">
 		<h2>UDFCD Project Density Per Basin</h2>
-		<p>Density for each basin was calculated summarizing the number of UDFCD Projects for each National Hydrology Datset Hydrologic Unit 10 Basin. </p>
+		<h4> Map Instructions </h4>
+		<p> Hover over streams and projects for more information.  Click on each
+			basin for more information </p>
+		<h4> About this map </h4>
+		<p>The Flood Control District partners with local jurisdictions to design
+			and construct flood control, open space, trails projects in the metro area. </p>
+		<p>Density per basin was calculated from the completed projects shapefile
+			provided by UDFCD. </p>
+		<p> National Hydrology Dataset basins were used to summarize the number
+			of projects within each basin.</p>
 		<p>Streams and UDFCD projects downloaded from
 			<a href="http://data.opencolorado.org/organization/urban-drainage-org"> Open Data Colorado</a></p>
 		<p> NHD HUC 10 basins downloaded from
 			<a href="https://water.usgs.gov/GIS/huc.html"> USGS</a>
 			<p>See my projects on <a href="https://github.com/jeremy-deischer">Github</a>.</p>
-			<p>Follow me on <a href="https://twitter.com/JeremyDeischer">Twitter</a>.</p>
 	</section>
 
 
@@ -221,7 +236,8 @@
 						fillOpacity: 0,
 						weight: 1.0
 					}
-				}
+				},
+				
 			}).addTo(map);
 			drawMap(dataLayer);
 		}); //end of getJSON
