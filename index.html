@@ -119,15 +119,10 @@
 	<section id="about">
 		<h2>UDFCD Project Density Per Basin</h2>
 		<h4> Map Instructions </h4>
-		<p> Hover over streams and projects for more information.  Click on each
-			basin for more information </p>
+		<p> Hover for more information on basins, streams, and projects.</p>
 		<h4> About this map </h4>
 		<p>The Flood Control District partners with local jurisdictions to design
 			and construct flood control, open space, trails projects in the metro area. </p>
-		<p>Density per basin was calculated from the completed projects shapefile
-			provided by UDFCD. </p>
-		<p> National Hydrology Dataset basins were used to summarize the number
-			of projects within each basin.</p>
 		<p>Streams and UDFCD projects downloaded from
 			<a href="http://data.opencolorado.org/organization/urban-drainage-org"> Open Data Colorado</a></p>
 		<p> NHD HUC 10 basins downloaded from
@@ -251,8 +246,8 @@
 			var dataLayer = L.geoJson(data, {
 				style: function(feature) {
 					return {
-						color: 'red',
-						weight: 4,
+						color: '#484848',
+						weight: 5,
 						fillOpacity: 0
 					};
 				}
@@ -302,15 +297,15 @@
 
 		function getColor(d, breaks) {
 			if (d <= breaks[0][1]) {
-				return '#fed976';
+				return '#f1eef6';
 			} else if (d <= breaks[1][1]) {
-				return '#feb24c';
+				return '#d7b5d8';
 			} else if (d <= breaks[2][1]) {
-				return '#fc4e2a';
+				return '#df65b0';
 			} else if (d <= breaks[3][1]) {
-				return '#e31a1c';
+				return '#dd1c77';
 			} else if (d <= breaks[4][1]) {
-				return '#b10026';
+				return '#980043';
 			}
 		}; //end of getColorWidth
 
