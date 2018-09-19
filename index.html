@@ -241,7 +241,7 @@
 
 				layer.setStyle({
 					fillColor: getColor(props.Density, breaks),
-					fillOpacity: 0.4
+					fillOpacity: 0.6
 				});
 			}); //end of each layer
 			drawLegend(breaks);
@@ -272,15 +272,15 @@
 
 		function getColor(d, breaks) {
 			if (d <= breaks[0][1]) {
-				return '#e66101';
+				return '#fed976';
 			} else if (d <= breaks[1][1]) {
-				return '#fdb863';
+				return '#feb24c';
 			} else if (d <= breaks[2][1]) {
-				return '#f7f7f7';
+				return '#fc4e2a';
 			} else if (d <= breaks[3][1]) {
-				return '#b2abd2';
+				return '#e31a1c';
 			} else if (d <= breaks[4][1]) {
-				return '#5e3c99';
+				return '#b10026';
 			}
 		}; //end of getColorWidth
 
