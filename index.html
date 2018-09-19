@@ -152,18 +152,7 @@
 		}).addTo(map);
 
 
-		//Load UDFCD Boundary to map
-		$.getJSON("data/udfcd_boundary.json", function(data) {
-			var dataLayer = L.geoJson(data, {
-				style: function(feature) {
-					return {
-						color: 'red',
-						weight: 4,
-						fillOpacity: 0
-					};
-				}
-			}).addTo(map);
-		}) //end of getJson
+
 
 		//Load Projects into map
 		$.getJSON("data/udfcdprojects.json", function(data) {
@@ -237,13 +226,38 @@
 						weight: 1.0
 					}
 				},
-				
+				onEachFeature: function(feature, layer){
+					layer.on('mouseover', function() {
+						layer.setStyle({
+							color: 'yellow',
+							weight: 3.0
+						});
+					});
+					layer.on('mouseout', function() {
+						layer.setStyle({
+							color: 'black',
+							weight: 1.0
+						});
+					});
+						layer.bindTooltip('<b>' + feature.properties.Name +
+												'<br> Projects in Basin: </b>' + feature.properties.Num)
+				}
 			}).addTo(map);
 			drawMap(dataLayer);
 		}); //end of getJSON
 
-
-
+		//Load UDFCD Boundary to map
+		$.getJSON("data/udfcd_boundary.json", function(data) {
+			var dataLayer = L.geoJson(data, {
+				style: function(feature) {
+					return {
+						color: 'red',
+						weight: 4,
+						fillOpacity: 0
+					};
+				}
+			}).addTo(map);
+		}) //end of getJson
 
 		//drawMap will call class breaks to classify lengths of drainagways
 		function drawMap(dataLayer) {
